@@ -58,8 +58,8 @@ export default {
     },
     makeVertical() {
       this.direction = 'vertical';
-      this.height = 800;
-      this.width = 500;
+      this.height = 500;
+      this.width = 400;
     },
     makeHorizontal() {
       this.direction = 'horizontal';

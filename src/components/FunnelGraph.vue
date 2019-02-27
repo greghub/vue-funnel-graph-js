@@ -6,11 +6,11 @@
           <linearGradient :id="`funnelGradient-${(index+1)}`"
                           v-for="(colors, index) in gradientSet"
                           :key="index"
-                          :gradientTransform="`rotate(${gradientDirection === 'vertical' ? 90 : 0})`"
+                          :gradientTransform="gradientAngle"
           >
             <stop :stop-color="color"
-              :offset="Math.round(100 * index / (colors.colors.length - 1)) + '%'"
-              v-for="(color, index) in colors.colors"
+              :offset="offsetColor(index, colors.values.length)"
+              v-for="(color, index) in colors.values"
               :key="index"
             ></stop>
           </linearGradient>
@@ -43,6 +43,7 @@
 import FunnelGraph from 'funnel-graph-js';
 import { formatNumber } from 'funnel-graph-js/src/js/number';
 import { getDefaultColors } from 'funnel-graph-js/src/js/graph';
+import 'funnel-graph-js/src/scss/main.scss';
 
 export default {
   name: 'FunnelGraph',
@@ -84,13 +85,13 @@ export default {
       let gradientCount = 0;
 
       for (let i = 0; i < this.valueSize; i++) {
-        const colors = (this.graph.is2d()) ? this.getColors[i] : this.getColors;
-        const fillMode = (typeof colors === 'string' || colors.length === 1) ? 'solid' : 'gradient';
-        if (fillMode === 'gradient') gradientCount++;
+        const values = (this.graph.is2d()) ? this.getColors[i] : this.getColors;
+        const fillMode = (typeof values === 'string' || values.length === 1) ? 'solid' : 'gradient';
+        if (fillMode === 'gradient') gradientCount += 1;
         colorSet.push({
-          colors,
+          values,
           fillMode,
-          fill: fillMode === 'solid' ? colors : `url('#funnelGradient-${gradientCount}')`
+          fill: fillMode === 'solid' ? values : `url('#funnelGradient-${gradientCount}')`
         });
       }
       return colorSet;
@@ -109,6 +110,9 @@ export default {
         return getDefaultColors(this.is2d() ? this.values[0].length : 2);
       }
       return this.colors;
+    },
+    gradientAngle() {
+      return `rotate(${this.gradientDirection === 'vertical' ? 90 : 0})`;
     }
   },
   methods: {
@@ -120,6 +124,9 @@ export default {
         return [];
       }
       return this.graph.getPercentages2d();
+    },
+    offsetColor(index, length) {
+      return `${Math.round(100 * index / (length - 1))}%`;
     },
     drawPaths() {
       this.paths = [];
@@ -158,7 +165,5 @@ export default {
 </script>
 
 <style scoped>
-.funnel {
-  position: relative;
-}
+
 </style>
