@@ -26,6 +26,9 @@
       >
         <div class="label__value">{{ value }}</div>
         <div class="label__title" v-if="labels">{{ labels[index] }}</div>
+        <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100">
+          {{ percentages()[index] }}%
+        </div>
         <div class="label__segment-percentages" v-if="is2d()">
           <ul class="segment-percentage__list">
             <li v-for="(subLabel, j) in subLabels" :key="j">
@@ -40,6 +43,8 @@
 </template>
 
 <script>
+import { interpolate } from 'polymorph-js';
+import TWEEN from '@tweenjs/tween.js';
 import FunnelGraph from 'funnel-graph-js';
 import { formatNumber } from 'funnel-graph-js/src/js/number';
 import { getDefaultColors } from 'funnel-graph-js/src/js/graph';
@@ -48,6 +53,10 @@ import 'funnel-graph-js/src/scss/main.scss';
 export default {
   name: 'FunnelGraph',
   props: {
+    animated: {
+      type: Boolean,
+      default: false
+    },
     width: [String, Number],
     height: [String, Number],
     values: Array,
@@ -64,13 +73,19 @@ export default {
     gradientDirection: {
       type: String,
       default: 'horizontal'
+    },
+    displayPercentage: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
     return {
       paths: [],
+      prevPaths: [], // paths before update, used for animations
       graph: null,
-      valueSize: 0
+      animationRunning: false,
+      defaultColors: getDefaultColors(10)
     };
   },
   computed: {
@@ -84,8 +99,8 @@ export default {
       const colorSet = [];
       let gradientCount = 0;
 
-      for (let i = 0; i < this.valueSize; i++) {
-        const values = (this.graph.is2d()) ? this.getColors[i] : this.getColors;
+      for (let i = 0; i < this.paths.length; i++) {
+        const values = this.graph.is2d() ? this.getColors[i] : this.getColors;
         const fillMode = (typeof values === 'string' || values.length === 1) ? 'solid' : 'gradient';
         if (fillMode === 'gradient') gradientCount += 1;
         colorSet.push({
@@ -109,6 +124,11 @@ export default {
       if (this.colors instanceof Array && this.colors.length === 0) {
         return getDefaultColors(this.is2d() ? this.values[0].length : 2);
       }
+      if (this.colors.length < this.paths.length) {
+        return [...this.colors].concat(
+          [...this.defaultColors].splice(this.paths.length, this.paths.length - this.colors.length)
+        );
+      }
       return this.colors;
     },
     gradientAngle() {
@@ -119,6 +139,9 @@ export default {
     is2d() {
       return this.graph.is2d();
     },
+    percentages() {
+      return this.graph.createPercentages();
+    },
     twoDimPercentages() {
       if (!this.is2d()) {
         return [];
@@ -128,10 +151,66 @@ export default {
     offsetColor(index, length) {
       return `${Math.round(100 * index / (length - 1))}%`;
     },
+    makeAnimations() {
+      const interpolators = [];
+      const dimensionChanged = this.prevPaths.length !== this.paths.length;
+
+      let origin = { x: 0.5, y: 0.5 };
+      if (dimensionChanged) {
+        origin = { x: 0, y: 0.5 };
+        if (this.graph.isVertical()) {
+          origin = { x: 1, y: 1 };
+        }
+        if (!this.graph.is2d()) {
+          origin = { x: 0, y: 1 };
+        }
+      }
+
+      this.paths.forEach((path, index) => {
+        let oldPath = this.prevPaths[index] || this.graph.getPathMedian(index);
+        if (dimensionChanged) oldPath = this.graph.getPathMedian(index);
+        const interpolator = interpolate([oldPath, path], {
+          addPoints: 1,
+          origin,
+          optimize: 'fill',
+          precision: 1
+        });
+
+        interpolators.push(interpolator);
+      });
+
+      function animate() {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      const position = { value: 0 };
+      const tween = new TWEEN.Tween(position)
+        .to({ value: 1 }, 700)
+        .easing(TWEEN.Easing.Cubic.InOut)
+        .onStart(() => {
+          this.animationRunning = true;
+        })
+        .onUpdate(() => {
+          for (let index = 0; index < this.paths.length; index++) {
+            this.paths[index] = interpolators[index](position.value);
+            // eslint-disable-next-line no-underscore-dangle
+            this.paths.__ob__.dep.notify();
+          }
+        })
+        .onComplete(() => {
+          this.animationRunning = false;
+        });
+
+      if (this.animationRunning === false) tween.start();
+
+      animate();
+    },
     drawPaths() {
+      this.prevPaths = this.paths;
       this.paths = [];
       const definitions = this.graph.getPathDefinitions();
-      this.valueSize = definitions.length;
 
       definitions.forEach((d) => {
         this.paths.push(d);
@@ -148,11 +227,13 @@ export default {
       }
     });
     this.drawPaths();
+    if (this.animated) this.makeAnimations();
   },
   watch: {
     values() {
       this.graph.setValues(this.values);
       this.drawPaths();
+      if (this.animated) this.makeAnimations();
     },
     direction() {
       this.graph.setDirection(this.direction)
