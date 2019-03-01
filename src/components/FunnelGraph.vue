@@ -20,34 +20,39 @@
         ></path>
       </svg>
     </div>
-    <div class="svg-funnel-js__labels">
-      <div class="svg-funnel-js__label" :class="`label-${(index+1)}`"
-        v-for="(value, index) in valuesFormatted" :key="index"
+      <transition-group class="svg-funnel-js__labels" name="appear" tag="div"
+        v-on:enter="enterTransition" v-on:leave="leaveTransition"
       >
-        <div class="label__value">{{ value }}</div>
-        <div class="label__title" v-if="labels">{{ labels[index] }}</div>
-        <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100">
-          {{ percentages()[index] }}%
+        <div class="svg-funnel-js__label" :class="`label-${(index+1)}`"
+          v-for="(value, index) in valuesFormatted" :key="index"
+        >
+          <div class="label__value">{{ value }}</div>
+          <div class="label__title" v-if="labels">{{ labels[index] }}</div>
+          <div class="label__percentage" v-if="displayPercentage && percentages()[index] !== 100">
+            {{ percentages()[index] }}%
+          </div>
+          <div class="label__segment-percentages" v-if="is2d()">
+            <ul class="segment-percentage__list">
+              <li v-for="(subLabel, j) in subLabels" :key="j">
+                {{ subLabel }}:
+                <span class="percentage__list-label">{{ twoDimPercentages()[index][j] }}%</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="label__segment-percentages" v-if="is2d()">
-          <ul class="segment-percentage__list">
-            <li v-for="(subLabel, j) in subLabels" :key="j">
-              {{ subLabel }}:
-              <span class="percentage__list-label">{{ twoDimPercentages()[index][j] }}%</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+      </transition-group>
   </div>
 </template>
 
 <script>
 import { interpolate } from 'polymorph-js';
 import TWEEN from '@tweenjs/tween.js';
-import FunnelGraph from 'funnel-graph-js';
-import { formatNumber } from 'funnel-graph-js/src/js/number';
-import { getDefaultColors } from 'funnel-graph-js/src/js/graph';
+// import FunnelGraph from 'funnel-graph-js';
+// import { formatNumber } from 'funnel-graph-js/src/js/number';
+// import { getDefaultColors } from 'funnel-graph-js/src/js/graph';
+import FunnelGraph from '../../../funnel/index';
+import { formatNumber } from '../../../funnel/src/js/number';
+import { getDefaultColors } from '../../../funnel/src/js/graph';
 import 'funnel-graph-js/src/scss/main.scss';
 
 export default {
@@ -136,6 +141,12 @@ export default {
     }
   },
   methods: {
+    enterTransition(el, done) {
+      if (!this.animated) done();
+    },
+    leaveTransition(el, done) {
+      if (!this.animated) done();
+    },
     is2d() {
       return this.graph.is2d();
     },
@@ -246,5 +257,17 @@ export default {
 </script>
 
 <style scoped>
+.appear-enter-active, .appear-leave-active {
+  transition: all .7s ease-in-out;
+}
 
+.appear-enter-to, .appear-leave {
+  max-width: 100%;
+  opacity: 1;
+}
+
+.appear-enter, .appear-leave-to {
+  max-width: 0%;
+  opacity: 0;
+}
 </style>
