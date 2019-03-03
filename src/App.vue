@@ -8,13 +8,12 @@
       ></funnel-graph>
     </div>
     <div class="fields">
-      <button @click="makeData1">Make One Dim</button>
-      <button @click="makeData3">Make One Dim 3</button>
-      <button @click="makeData4">Make One Dim 4</button>
-      <button @click="makeData2">Make Two Dim</button>
-      <button @click="makeData5">Make Two Dim 5</button>
-      <button @click="makeData6">Make Two Dim 6</button>
-      <button @click="makeData7">Make Two Dim 7</button>
+      <button @click="makeData1">Data 1</button>
+      <button @click="makeData2">Data 2</button>
+      <button @click="makeData3">Data 3</button>
+      <button @click="makeData4">Data 4</button>
+      <button @click="makeData5">Data 5</button>
+      <button @click="makeData6">Data 6</button>
       <button @click="(direction === 'horizontal') ? makeVertical() : makeHorizontal()">Rotate</button>
       <button @click="(gradientDirection === 'horizontal') ? gradientV() : gradientH()">Rotate Gradient</button>
     </div>
@@ -45,10 +44,16 @@ export default {
     makeData1() {
       this.labels = ['Impressions', 'Add To Cart', 'Buy'];
       this.subLabels = [];
-      this.values = [12000, 5700, 930];
+      this.values = [12000, 4700, 930];
       this.colors = ['#FFB178', '#FF3C8E'];
     },
     makeData2() {
+      this.labels = ['Impressions', 'Add To Cart', 'Buy'];
+      this.subLabels = [];
+      this.values = [14000, 9100, 1230];
+      this.colors = ['#A0BBFF', '#EC77FF'];
+    },
+    makeData3() {
       this.labels = ['Impressions', 'Add To Cart', 'Buy'];
       this.subLabels = ['Direct', 'Social Media', 'Ads'];
       this.values = [
@@ -62,69 +67,43 @@ export default {
         ['#A0F9FF', '#7795FF']
       ];
     },
-    makeData3() {
-      this.values = [12000, 8700, 3330];
-      this.colors = ['#FFB178', '#FF3C8E'];
-    },
     makeData4() {
-      this.labels = ['Impressions', 'Add To Cart', 'Buy', 'More'];
-      this.colors = ['#FFB178', '#FF3C8E'];
-      this.values = [12000, 8700, 3330, 400];
+      this.labels = ['Impressions', 'Add To Cart', 'Buy', 'Return'];
+      this.subLabels = [];
+      this.values = [14000, 9100, 4230, 260];
+      this.colors = ['#FF4589', '#FF5050'];
     },
     makeData5() {
       this.labels = ['Impressions', 'Add To Cart', 'Buy'];
-      this.subLabels = ['Direct', 'Social Media', 'Ads'];
-      this.values = [
-        [3000, 2500, 6500, 3000],
-        [3000, 1700, 1000, 500],
-        [600, 200, 130, 75]
-      ];
-      this.colors = [
-        ['#FFB178', '#FF78B1', '#FF3C8E'],
-        ['#A0BBFF', '#EC77FF'],
-        ['#A0F9FF', '#7795FF']
-      ];
+      this.subLabels = [];
+      this.values = [12650, 4230, 263];
+      this.colors = ['#FF9A9A', '#FFB178'];
     },
     makeData6() {
-      this.labels = ['Impressions', 'Add To Cart', 'Buy', 'Review'];
-      this.subLabels = ['Direct', 'Social Media', 'Ads', 'Other'];
+      this.labels = ['Impressions', 'Add To Cart', 'Buy'];
+      this.subLabels = ['Direct', 'Social Media', 'Ads'];
       this.values = [
-        [2000, 1500, 3500, 5000],
-        [4000, 2700, 5000, 700],
-        [700, 200, 130, 75]
+        [3000, 2500, 2000, 4500],
+        [3000, 1700, 500, 500],
+        [600, 200, 100, 30]
       ];
       this.colors = [
-        ['#FFB178', '#FF78B1', '#FF3C8E'],
         ['#A0BBFF', '#EC77FF'],
-        ['#A0F9FF', '#7795FF'],
-        'red'
-      ];
-    },
-    makeData7() {
-      this.labels = ['Impressions', 'Add To Cart', 'Buy', 'Review'];
-      this.subLabels = ['Direct', 'Social Media', 'Ads', 'Other'];
-      this.values = [
-        [2000, 1500, 3500, 5000],
-        [4000, 2700, 5000, 700],
-        [700, 200, 130, 75],
-        [100, 70, 80, 25]
-      ];
-      this.colors = [
         ['#FFB178', '#FF78B1', '#FF3C8E'],
-        ['#A0BBFF', '#EC77FF'],
-        ['#A0F9FF', '#7795FF'],
-        'red'
+        ['#A0F9FF', '#7795FF']
       ];
     },
     makeVertical() {
       this.direction = 'vertical';
       this.height = 500;
       this.width = 400;
+      this.gradientV();
     },
     makeHorizontal() {
       this.direction = 'horizontal';
       this.height = 300;
       this.width = 800;
+      this.gradientH();
     },
     gradientV() {
       this.gradientDirection = 'vertical';
