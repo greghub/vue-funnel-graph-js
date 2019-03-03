@@ -47,13 +47,11 @@
 <script>
 import { interpolate } from 'polymorph-js';
 import TWEEN from '@tweenjs/tween.js';
-// import FunnelGraph from 'funnel-graph-js';
-// import { formatNumber } from 'funnel-graph-js/src/js/number';
-// import { getDefaultColors } from 'funnel-graph-js/src/js/graph';
-import FunnelGraph from '../../../funnel/index';
-import { formatNumber } from '../../../funnel/src/js/number';
-import { getDefaultColors } from '../../../funnel/src/js/graph';
+import FunnelGraph from 'funnel-graph-js';
+import { formatNumber } from 'funnel-graph-js/src/js/number';
+import { getDefaultColors } from 'funnel-graph-js/src/js/graph';
 import 'funnel-graph-js/src/scss/main.scss';
+import 'funnel-graph-js/src/scss/theme.scss';
 
 export default {
   name: 'FunnelGraph',
@@ -263,11 +261,13 @@ export default {
 
 .appear-enter-to, .appear-leave {
   max-width: 100%;
+  max-height: 100%;
   opacity: 1;
 }
 
 .appear-enter, .appear-leave-to {
-  max-width: 0%;
+  max-width: 0;
+  max-height: 0;
   opacity: 0;
 }
 </style>
