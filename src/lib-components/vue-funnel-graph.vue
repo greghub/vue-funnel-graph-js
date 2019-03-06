@@ -21,10 +21,9 @@
             </svg>
         </div>
         <transition-group class="svg-funnel-js__labels" name="appear" tag="div"
-                          v-on:enter="enterTransition" v-on:leave="leaveTransition"
         >
             <div class="svg-funnel-js__label" :class="`label-${(index+1)}`"
-                 v-for="(value, index) in valuesFormatted" :key="labels[index].toLowerCase().replace(' ', '-')"
+                 v-for="(value, index) in valuesFormatted" :key="labels[index].toLowerCase().split(' ').join('-')"
             >
                 <div class="label__value">{{ value }}</div>
                 <div class="label__title" v-if="labels">{{ labels[index] }}</div>
