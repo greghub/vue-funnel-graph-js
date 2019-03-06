@@ -1,6 +1,6 @@
 {
   "name": "vue-funnel-graph-js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "dist/vue-funnel-graph.umd.js",
   "module": "dist/vue-funnel-graph.esm.js",
@@ -19,8 +19,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^17.3.0",
     "funnel-graph-js": "^1.3.6",
-    "polymorph-js": "^0.2.4",
-    "vue": "^2.6.8"
+    "polymorph-js": "^0.2.4"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
@@ -34,7 +33,8 @@
     "rollup-plugin-uglify-es": "0.0.1",
     "rollup-plugin-vue": "^4.6.2",
     "sass-loader": "^7.1.0",
-    "vue": "^2.5.22",
-    "vue-template-compiler": "^2.5.22"
+    "vue": "^2.6.8",
+    "vue-template-compiler": "^2.5.22",
+    "webpack": "^4.0.0"
   }
 }
