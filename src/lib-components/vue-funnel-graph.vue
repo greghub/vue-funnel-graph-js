@@ -41,6 +41,18 @@
                 </div>
             </div>
         </transition-group>
+        <transition name="fade">
+            <div class="svg-funnel-js__subLabels" v-if="is2d()">
+                <div :class="`svg-funnel-js__subLabel svg-funnel-js__subLabel-${(index + 1)}`"
+                     v-for="(subLabel, index) in subLabels"
+                     :key="index"
+                >
+                    <div class="svg-funnel-js__subLabel--color"
+                         :style="subLabelBackgrounds(index)"></div>
+                    <div class="svg-funnel-js__subLabel--title">{{ subLabel }}</div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -49,7 +61,7 @@
     import TWEEN from '@tweenjs/tween.js';
     import FunnelGraph from 'funnel-graph-js';
     import { formatNumber } from 'funnel-graph-js/src/js/number';
-    import { getDefaultColors } from 'funnel-graph-js/src/js/graph';
+    import { getDefaultColors, generateLegendBackground } from 'funnel-graph-js/src/js/graph';
     import 'funnel-graph-js/src/scss/main.scss';
     import 'funnel-graph-js/src/scss/theme.scss';
 
@@ -156,6 +168,12 @@
                     return [];
                 }
                 return this.graph.getPercentages2d();
+            },
+            subLabelBackgrounds(index) {
+                if (!this.is2d()) {
+                    return [];
+                }
+                return generateLegendBackground(this.getColors[index], this.gradientDirection);
             },
             offsetColor(index, length) {
                 return `${Math.round(100 * index / (length - 1))}%`;
@@ -268,6 +286,18 @@
     .appear-enter, .appear-leave-to {
         max-width: 0;
         max-height: 0;
+        opacity: 0;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: all .3s ease;
+    }
+
+    .fade-enter-to, .fade-leave {
+        opacity: 1;
+    }
+
+    .fade-enter, .fade-leave-to {
         opacity: 0;
     }
 </style>
