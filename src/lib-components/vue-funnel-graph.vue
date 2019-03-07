@@ -21,6 +21,7 @@
             </svg>
         </div>
         <transition-group class="svg-funnel-js__labels" name="appear" tag="div"
+                          v-on:enter="enterTransition" v-on:leave="leaveTransition"
         >
             <div class="svg-funnel-js__label" :class="`label-${(index+1)}`"
                  v-for="(value, index) in valuesFormatted" :key="labels[index].toLowerCase().split(' ').join('-')"
@@ -40,7 +41,7 @@
                 </div>
             </div>
         </transition-group>
-        <transition name="fade">
+        <transition name="fade" v-on:enter="enterTransition" v-on:leave="leaveTransition">
             <div class="svg-funnel-js__subLabels" v-if="is2d()">
                 <div :class="`svg-funnel-js__subLabel svg-funnel-js__subLabel-${(index + 1)}`"
                      v-for="(subLabel, index) in subLabels"
@@ -152,9 +153,11 @@
         methods: {
             enterTransition(el, done) {
                 if (!this.animated) done();
+                setTimeout(() => done(), 700);
             },
             leaveTransition(el, done) {
                 if (!this.animated) done();
+                setTimeout(() => done(), 700);
             },
             is2d() {
                 return this.graph.is2d();
