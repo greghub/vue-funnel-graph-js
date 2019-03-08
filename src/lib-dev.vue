@@ -14,23 +14,24 @@ export default {
             direction: 'horizontal',
             gradientDirection: 'horizontal',
             height: 300,
-            width: 800
+            width: 800,
+            dataSetNum: 1
         };
     },
     methods: {
-        makeData1() {
+        useDataSet1() {
             this.labels = ['Impressions', 'Add To Cart', 'Buy'];
             this.subLabels = [];
             this.values = [12000, 4700, 930];
             this.colors = ['#FFB178', '#FF3C8E'];
         },
-        makeData2() {
+        useDataSet2() {
             this.labels = ['Impressions', 'Add To Cart', 'Buy'];
             this.subLabels = [];
             this.values = [14000, 9100, 1230];
             this.colors = ['#A0BBFF', '#EC77FF'];
         },
-        makeData3() {
+        useDataSet3() {
             this.labels = ['Impressions', 'Add To Cart', 'Buy'];
             this.subLabels = ['Direct', 'Social Media', 'Ads'];
             this.values = [
@@ -44,21 +45,21 @@ export default {
                 ['#A0F9FF', '#7795FF']
             ];
         },
-        makeData4() {
+        useDataSet4() {
             this.labels = ['Impressions', 'Add To Cart', 'Buy', 'Return'];
             this.subLabels = [];
             this.values = [14000, 9100, 4230, 260];
             this.colors = ['#FF4589', '#FF5050'];
         },
-        makeData5() {
+        useDataSet5() {
             this.labels = ['Impressions', 'Add To Cart', 'Buy'];
             this.subLabels = [];
             this.values = [12650, 4230, 263];
             this.colors = ['#FF9A9A', '#FFB178'];
         },
-        makeData6() {
+        useDataSet6() {
             this.labels = ['Impressions', 'Add To Cart', 'Buy'];
-            this.subLabels = ['Direct', 'Social Media', 'Ads'];
+            this.subLabels = ['Direct', 'Social Media', 'Ads', 'Other'];
             this.values = [
                 [3000, 2500, 2000, 4500],
                 [3000, 1700, 500, 500],
@@ -82,11 +83,25 @@ export default {
             this.width = 800;
             this.gradientH();
         },
+        toggleDirection() {
+            (this.direction === 'horizontal') ? this.makeVertical() : this.makeHorizontal();
+        },
         gradientV() {
             this.gradientDirection = 'vertical';
         },
         gradientH() {
             this.gradientDirection = 'horizontal';
+        },
+        toggleGradient() {
+            (this.gradientDirection === 'horizontal') ? this.gradientV() : this.gradientH();
+        },
+        getNextSet() {
+            this.dataSetNum++;
+            if (this.dataSetNum > 6) {
+                this.dataSetNum = 1;
+            }
+
+            this[`useDataSet${this.dataSetNum}`]();
         }
     }
 }
@@ -101,15 +116,10 @@ export default {
                               :animated="true" :display-percentage="true"
             ></vue-funnel-graph>
         </div>
-        <div class="fields">
-            <button @click="makeData1">Data 1</button>
-            <button @click="makeData2">Data 2</button>
-            <button @click="makeData3">Data 3</button>
-            <button @click="makeData4">Data 4</button>
-            <button @click="makeData5">Data 5</button>
-            <button @click="makeData6">Data 6</button>
-            <button @click="(direction === 'horizontal') ? makeVertical() : makeHorizontal()">Rotate</button>
-            <button @click="(gradientDirection === 'horizontal') ? gradientV() : gradientH()">Rotate Gradient</button>
+        <div class="controls">
+            <button @click="getNextSet()">Change Data</button>
+            <button @click="toggleDirection()">Toggle Direction</button>
+            <button @click="toggleGradient()">Toggle Gradient Direction</button>
         </div>
     </div>
 </template>
@@ -122,15 +132,33 @@ export default {
     .vue-funnel-graph-lib-dev {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .funnels {
+        height: 580px;
+        margin-top: 32px;
+    }
+
+    .controls {
         display: flex;
     }
 
-    .fields {
-        display: flex;
-        flex-direction: column;
-        width: 400px;
+    button {
+        background: #21FFA2;
+        color: #393862;
+        border-radius: 4px;
+        border: none;
+        padding: 12px 24px;
+        margin: 0 5px;
+        font-size: 16px;
+        outline: 0;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #05DF9D;
     }
 </style>
