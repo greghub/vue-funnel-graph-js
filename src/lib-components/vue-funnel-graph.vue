@@ -99,7 +99,7 @@
                 paths: [],
                 prevPaths: [], // paths before update, used for animations
                 graph: null,
-                animationRunning: false,
+                tween: null,
                 defaultColors: getDefaultColors(10)
             };
         },
@@ -181,6 +181,7 @@
                 return `${Math.round(100 * index / (length - 1))}%`;
             },
             makeAnimations() {
+                if (this.tween !== null) { this.tween.stop(); }
                 const interpolators = [];
                 const dimensionChanged = this.prevPaths.length !== this.paths.length;
 
@@ -215,25 +216,18 @@
                 }
 
                 const position = { value: 0 };
-                const tween = new TWEEN.Tween(position)
+                this.tween = new TWEEN.Tween(position)
                     .to({ value: 1 }, 700)
                     .easing(TWEEN.Easing.Cubic.InOut)
-                    .onStart(() => {
-                        this.animationRunning = true;
-                    })
                     .onUpdate(() => {
                         for (let index = 0; index < this.paths.length; index++) {
                             this.paths[index] = interpolators[index](position.value);
                             // eslint-disable-next-line no-underscore-dangle
                             this.paths.__ob__.dep.notify();
                         }
-                    })
-                    .onComplete(() => {
-                        this.animationRunning = false;
                     });
 
-                if (this.animationRunning === false) tween.start();
-
+                this.tween.start();
                 animate();
             },
             drawPaths() {

@@ -42,7 +42,7 @@ var script = {
             paths: [],
             prevPaths: [], // paths before update, used for animations
             graph: null,
-            animationRunning: false,
+            tween: null,
             defaultColors: getDefaultColors(10)
         };
     },
@@ -126,6 +126,7 @@ var script = {
         makeAnimations: function makeAnimations() {
             var this$1 = this;
 
+            if (this.tween !== null) { this.tween.stop(); }
             var interpolators = [];
             var dimensionChanged = this.prevPaths.length !== this.paths.length;
 
@@ -160,25 +161,18 @@ var script = {
             }
 
             var position = { value: 0 };
-            var tween = new TWEEN.Tween(position)
+            this.tween = new TWEEN.Tween(position)
                 .to({ value: 1 }, 700)
                 .easing(TWEEN.Easing.Cubic.InOut)
-                .onStart(function () {
-                    this$1.animationRunning = true;
-                })
                 .onUpdate(function () {
                     for (var index = 0; index < this$1.paths.length; index++) {
                         this$1.paths[index] = interpolators[index](position.value);
                         // eslint-disable-next-line no-underscore-dangle
                         this$1.paths.__ob__.dep.notify();
                     }
-                })
-                .onComplete(function () {
-                    this$1.animationRunning = false;
                 });
 
-            if (this.animationRunning === false) { tween.start(); }
-
+            this.tween.start();
             animate();
         },
         drawPaths: function drawPaths() {
@@ -365,11 +359,11 @@ var __vue_staticRenderFns__ = [];
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) { return }
-    inject("data-v-44059b02_0", { source: ".appear-enter-active[data-v-44059b02],.appear-leave-active[data-v-44059b02]{transition:all .7s ease-in-out}.appear-enter-to[data-v-44059b02],.appear-leave[data-v-44059b02]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-44059b02],.appear-leave-to[data-v-44059b02]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-44059b02],.fade-leave-active[data-v-44059b02]{transition:all .3s ease}.fade-enter-to[data-v-44059b02],.fade-leave[data-v-44059b02]{opacity:1}.fade-enter[data-v-44059b02],.fade-leave-to[data-v-44059b02]{opacity:0}", map: undefined, media: undefined });
+    inject("data-v-6203abd4_0", { source: ".appear-enter-active[data-v-6203abd4],.appear-leave-active[data-v-6203abd4]{transition:all .7s ease-in-out}.appear-enter-to[data-v-6203abd4],.appear-leave[data-v-6203abd4]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-6203abd4],.appear-leave-to[data-v-6203abd4]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-6203abd4],.fade-leave-active[data-v-6203abd4]{transition:all .3s ease}.fade-enter-to[data-v-6203abd4],.fade-leave[data-v-6203abd4]{opacity:1}.fade-enter[data-v-6203abd4],.fade-leave-to[data-v-6203abd4]{opacity:0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  var __vue_scope_id__ = "data-v-44059b02";
+  var __vue_scope_id__ = "data-v-6203abd4";
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
