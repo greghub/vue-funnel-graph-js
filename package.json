@@ -10,6 +10,25 @@
     "src/*",
     "!src/lib-dev.vue"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greghub/vue-funnel-graph-js.git"
+  },
+  "keywords": [
+    "funnel",
+    "chart",
+    "graph",
+    "funnel-chart",
+    "funnel-graph",
+    "svg-funnel-chart",
+    "svg-funnel-graph",
+    "vue",
+    "vue-funnel-graph",
+    "vue-funnel-chart",
+    "vue-graph",
+    "vue-plot",
+    "vue-funnel"
+  ],
   "scripts": {
     "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
     "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/vue-funnel-graph.umd.js",
