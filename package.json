@@ -1,10 +1,13 @@
 {
   "name": "vue-funnel-graph-js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "dist/vue-funnel-graph.umd.js",
   "module": "dist/vue-funnel-graph.esm.js",
   "unpkg": "dist/vue-funnel-graph.min.js",
+  "browser": {
+    "./sfc": "src/lib-components/vue-funnel-graph.vue"
+  },
   "files": [
     "dist/*",
     "src/*",
