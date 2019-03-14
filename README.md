@@ -11,7 +11,7 @@ Funnel graph drawing library for Vue.js.
 * Solid color and gradient fill
 * Horizontal and vertical charts
 
-<img src="https://i.imgur.com/BEkq4DE.gif">
+<img src="https://s2.gifyu.com/images/funnel-graph.gif">
 
 This is the Vue.js version of FunnelGraph.js, learn more about the library and see documentation [here.](https://github.com/greghub/funnel-graph-js)
 
@@ -20,6 +20,16 @@ This is the Vue.js version of FunnelGraph.js, learn more about the library and s
 #### NPM
 ```js
 npm i vue-funnel-graph-js
+```
+
+#### UNPKG
+```html
+<script src="https://unpkg.com/vue-funnel-graph-js"></script>
+```
+
+#### CDN
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue-funnel-graph-js/dist/vue-funnel-graph.min.js"></script>
 ```
 
 ## Usage
@@ -40,7 +50,7 @@ You can now use the custom element:
 ```
 
 The values are passed to props:
-```vuejs
+```js
 export default {
   name: 'app',
   components: {
