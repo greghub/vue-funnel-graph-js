@@ -66,14 +66,19 @@ export default {
           labels: ['Impressions', 'Add To Cart', 'Buy'],
           subLabels: ['Direct', 'Social Media', 'Ads'],
           values: [
-              [3000, 2500, 6500],
-              [3000, 1700, 1000],
-              [600, 200, 130]
+          // with the given Labels and SubLabels here's what the values represent:
+          // 
+          // Direct, Social, Ads  
+          //    |      |     |  
+          //    v      v     v
+              [3000, 2500, 6500], // Segments of "Impressions" from top to bottom
+              [3000, 1700, 1000], // Segments of "Add To Cart"
+              [600,  200,  130]   // Segments of "Buy"
           ],
           colors: [
-              ['#FFB178', '#FF78B1', '#FF3C8E'],
-              ['#A0BBFF', '#EC77FF'],
-              ['#A0F9FF', '#7795FF']
+              ['#FFB178', '#FF3C8E'], // color set for "Impressions" segment
+              ['#A0BBFF', '#EC77FF'], // color set for "Add To Cart" segment
+              ['#A0F9FF', '#7795FF']  // color set for "Buy" segment
           ],
           direction: 'horizontal',
           gradientDirection: 'horizontal',
