@@ -1,5 +1,10 @@
 # VueFunnelGraph.js
 
+![npm](https://img.shields.io/npm/v/vue-funnel-graph-js.svg)
+![GitHub](https://img.shields.io/github/license/greghub/vue-funnel-graph-js.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/greghub/vue-funnel-graph-js.svg)
+[![Gitter](https://img.shields.io/gitter/room/greghub/funnel-graph-js.svg)](https://gitter.im/funnel-graph-js/community)
+
 Funnel graph drawing library for Vue.js.
 
 * SVG charts
