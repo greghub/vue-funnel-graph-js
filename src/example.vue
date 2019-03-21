@@ -1,9 +1,26 @@
+<template>
+    <div class="vue-funnel-graph-lib-dev">
+        <div class="funnels">
+            <vue-funnel-graph :width="width" :height="height" :labels="labels"
+                              :values="values" :colors="colors" :sub-labels="subLabels" :direction="direction"
+                              :gradient-direction="gradientDirection"
+                              :animated="true" :display-percentage="true"
+            ></vue-funnel-graph>
+        </div>
+        <div class="controls">
+            <button @click="getNextSet()">Change Data</button>
+            <button @click="toggleDirection()">Toggle Direction</button>
+            <button @click="toggleGradient()">Toggle Gradient Direction</button>
+        </div>
+    </div>
+</template>
+
 <script>
 import { VueFunnelGraph } from './entry';
 export default {
     name:  'VueFunnelGraphDev', // vue library dev component
     components: {
-        VueFunnelGraph,
+        VueFunnelGraph
     },
     data() {
         return {
@@ -107,23 +124,6 @@ export default {
 }
 </script>
 
-<template>
-    <div class="vue-funnel-graph-lib-dev">
-        <div class="funnels">
-            <vue-funnel-graph :width="width" :height="height" :labels="labels"
-                              :values="values" :colors="colors" :subLabels="subLabels" :direction="direction"
-                              :gradient-direction="gradientDirection"
-                              :animated="true" :display-percentage="true"
-            ></vue-funnel-graph>
-        </div>
-        <div class="controls">
-            <button @click="getNextSet()">Change Data</button>
-            <button @click="toggleDirection()">Toggle Direction</button>
-            <button @click="toggleGradient()">Toggle Gradient Direction</button>
-        </div>
-    </div>
-</template>
-
 <style>
     body {
         background-color: #393862;
@@ -140,6 +140,11 @@ export default {
     .funnels {
         height: 580px;
         margin-top: 32px;
+    }
+
+    .funnel:not(.svg-funnel-js--vertical) {
+        transition: transform 0.3s ease;
+        transform: translateY(100px);
     }
 
     .controls {

@@ -20,6 +20,19 @@ Funnel graph drawing library for Vue.js.
 
 This is the Vue.js version of FunnelGraph.js, learn more about the library and see documentation [here.](https://github.com/greghub/funnel-graph-js)
 
+## Demo
+
+#### Online Demo
+
+[CodePen Demo](https://codepen.io/gregh/full/gEBXPK)
+
+#### Development Demo
+
+* Clone the repo
+* Navigate to `src` folder
+* Run `vue serve example.vue`
+* Visit the URL displayed
+
 ## Installation
 
 #### NPM
@@ -48,7 +61,7 @@ import { VueFunnelGraph } from 'vue-funnel-graph-js';
 You can now use the custom element:
 ```vue
 <vue-funnel-graph :width="width" :height="height" :labels="labels"
-              :values="values" :colors="colors" :subLabels="subLabels" :direction="direction"
+              :values="values" :colors="colors" :sub-labels="subLabels" :direction="direction"
               :gradient-direction="gradientDirection"
               :animated="true" :display-percentage="true"
 ></vue-funnel-graph>
@@ -98,7 +111,7 @@ export default {
 | `labels` | Title of each data part | `array` | Yes | | | ['Impressions', 'Add To Cart', 'Buy'] |
 | `values` | Numbers that the funnel chart visualizes | `array` | Yes | | | [12000, 4700, 930] |
 | `colors` | Colors of the graph. If a string or array with one element passed it fills the graph with a solid color, if the array contains more than one element it fill the graph with a gradient. For two-dimensional charts and array of arrays shall be passed to fill each segment with a separate gradient. The array can contain arrays and strings mixed. If a there are more segments than colors provided, up to 10 extra segments will be filled with pre-defined solid colors | `array⎮string` | Yes | | | [12000, 4700, 930] |
-| `subLabels (:subLabels)` | Title of each data segment | `array` | Yes for two-dimensional graphs | | | ['Direct', 'Social Media', 'Ads'] |
+| `subLabels (:sub-labels)` | Title of each data segment | `array` | Yes for two-dimensional graphs | | | ['Direct', 'Social Media', 'Ads'] |
 | `direction` | Whether the chart visualization is displayed vertically or horizontally | `string` | No | 'vertical', 'horizontal' | 'horizontal' | |
 | `gradientDirection (:gradient-direction)` | Whether the gradient applied to the segments of the graph is displayed from top to bottom or from left to right | `string` | No | 'vertical', 'horizontal' | 'horizontal' |
 | `animated` | Whether any change in graph shape will be displayed with a smooth transition | `boolean` | No | `true`, `false` | `true` | `false` |

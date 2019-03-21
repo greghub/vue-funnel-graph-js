@@ -17,6 +17,7 @@
     "type": "git",
     "url": "https://github.com/greghub/vue-funnel-graph-js.git"
   },
+  "licence": "MIT",
   "keywords": [
     "funnel",
     "chart",
