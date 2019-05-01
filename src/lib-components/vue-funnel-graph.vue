@@ -268,7 +268,7 @@
     };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .appear-enter-active, .appear-leave-active {
         transition: all .7s ease-in-out;
     }
