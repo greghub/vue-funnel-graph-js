@@ -191,6 +191,7 @@ var script = {
         this.graph = new FunnelGraph({
             height: this.height,
             width: this.width,
+            direction: this.direction,
             data: {
                 labels: this.labels,
                 values: this.values
