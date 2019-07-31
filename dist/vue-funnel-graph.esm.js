@@ -191,6 +191,7 @@ var script = {
         this.graph = new FunnelGraph({
             height: this.height,
             width: this.width,
+            direction: this.direction,
             data: {
                 labels: this.labels,
                 values: this.values
@@ -359,11 +360,11 @@ var __vue_staticRenderFns__ = [];
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) { return }
-    inject("data-v-6203abd4_0", { source: ".appear-enter-active[data-v-6203abd4],.appear-leave-active[data-v-6203abd4]{transition:all .7s ease-in-out}.appear-enter-to[data-v-6203abd4],.appear-leave[data-v-6203abd4]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-6203abd4],.appear-leave-to[data-v-6203abd4]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-6203abd4],.fade-leave-active[data-v-6203abd4]{transition:all .3s ease}.fade-enter-to[data-v-6203abd4],.fade-leave[data-v-6203abd4]{opacity:1}.fade-enter[data-v-6203abd4],.fade-leave-to[data-v-6203abd4]{opacity:0}", map: undefined, media: undefined });
+    inject("data-v-de071f9e_0", { source: ".appear-enter-active[data-v-de071f9e],.appear-leave-active[data-v-de071f9e]{transition:all .7s ease-in-out}.appear-enter-to[data-v-de071f9e],.appear-leave[data-v-de071f9e]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-de071f9e],.appear-leave-to[data-v-de071f9e]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-de071f9e],.fade-leave-active[data-v-de071f9e]{transition:all .3s ease}.fade-enter-to[data-v-de071f9e],.fade-leave[data-v-de071f9e]{opacity:1}.fade-enter[data-v-de071f9e],.fade-leave-to[data-v-de071f9e]{opacity:0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  var __vue_scope_id__ = "data-v-6203abd4";
+  var __vue_scope_id__ = "data-v-de071f9e";
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
@@ -402,7 +403,7 @@ function install(Vue) {
 
 // Create module definition for Vue.use()
 var plugin = {
-  install: install,
+  install: install
 };
 
 // To auto-install when vue is found

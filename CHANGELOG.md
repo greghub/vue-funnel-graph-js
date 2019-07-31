@@ -1,3 +1,7 @@
+### 0.1.6 (Jul 31, 2019)
+
+* Fix issue where funnel was not generated vertically on load
+
 ### 0.1.3 (Mar 14, 2019)
 
 * Update documentation and add shields
