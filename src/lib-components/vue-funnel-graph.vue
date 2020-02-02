@@ -243,7 +243,7 @@
                 });
             }
         },
-        beforeMount() {
+        created() {
             this.graph = new FunnelGraph({
                 height: this.height,
                 width: this.width,

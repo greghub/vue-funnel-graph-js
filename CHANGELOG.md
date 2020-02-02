@@ -1,3 +1,7 @@
+### 0.1.8 (Feb 2, 2020)
+
+* Use lifecycle hook compatible with SSR
+
 ### 0.1.7 (Feb 2, 2020)
 
 * Add support for `subLabelValue`

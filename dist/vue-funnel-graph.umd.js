@@ -190,7 +190,7 @@
                 });
             }
         },
-        beforeMount: function beforeMount() {
+        created: function created() {
             this.graph = new FunnelGraph({
                 height: this.height,
                 width: this.width,
@@ -368,11 +368,11 @@
       /* style */
       var __vue_inject_styles__ = function (inject) {
         if (!inject) { return }
-        inject("data-v-3f236e82_0", { source: ".appear-enter-active[data-v-3f236e82],.appear-leave-active[data-v-3f236e82]{transition:all .7s ease-in-out}.appear-enter-to[data-v-3f236e82],.appear-leave[data-v-3f236e82]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-3f236e82],.appear-leave-to[data-v-3f236e82]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-3f236e82],.fade-leave-active[data-v-3f236e82]{transition:all .3s ease}.fade-enter-to[data-v-3f236e82],.fade-leave[data-v-3f236e82]{opacity:1}.fade-enter[data-v-3f236e82],.fade-leave-to[data-v-3f236e82]{opacity:0}", map: undefined, media: undefined });
+        inject("data-v-52d787cd_0", { source: ".appear-enter-active[data-v-52d787cd],.appear-leave-active[data-v-52d787cd]{transition:all .7s ease-in-out}.appear-enter-to[data-v-52d787cd],.appear-leave[data-v-52d787cd]{max-width:100%;max-height:100%;opacity:1}.appear-enter[data-v-52d787cd],.appear-leave-to[data-v-52d787cd]{max-width:0;max-height:0;opacity:0}.fade-enter-active[data-v-52d787cd],.fade-leave-active[data-v-52d787cd]{transition:all .3s ease}.fade-enter-to[data-v-52d787cd],.fade-leave[data-v-52d787cd]{opacity:1}.fade-enter[data-v-52d787cd],.fade-leave-to[data-v-52d787cd]{opacity:0}", map: undefined, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__ = "data-v-3f236e82";
+      var __vue_scope_id__ = "data-v-52d787cd";
       /* module identifier */
       var __vue_module_identifier__ = undefined;
       /* functional template */
