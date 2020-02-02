@@ -1,3 +1,9 @@
+### 0.1.7 (Feb 2, 2020)
+
+* Add support for `subLabelValue`
+* Update packages
+* Fix minor issue
+
 ### 0.1.6 (Jul 31, 2019)
 
 * Fix issue where funnel was not generated vertically on load
