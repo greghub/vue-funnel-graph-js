@@ -221,9 +221,7 @@
                     .easing(TWEEN.Easing.Cubic.InOut)
                     .onUpdate(() => {
                         for (let index = 0; index < this.paths.length; index++) {
-                            this.paths[index] = interpolators[index](position.value);
-                            // eslint-disable-next-line no-underscore-dangle
-                            this.paths.__ob__.dep.notify();
+                            this.$set(this.paths, index, interpolators[index](position.value));
                         }
                     });
 
