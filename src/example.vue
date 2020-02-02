@@ -5,6 +5,7 @@
                               :values="values" :colors="colors" :sub-labels="subLabels" :direction="direction"
                               :gradient-direction="gradientDirection"
                               :animated="true" :display-percentage="true"
+                              :sub-label-value="subLabelValue"
             ></vue-funnel-graph>
         </div>
         <div class="controls">
@@ -32,7 +33,8 @@ export default {
             gradientDirection: 'horizontal',
             height: 300,
             width: 800,
-            dataSetNum: 1
+            dataSetNum: 1,
+            subLabelValue: 'percent'
         };
     },
     methods: {

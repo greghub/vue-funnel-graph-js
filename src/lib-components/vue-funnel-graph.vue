@@ -35,7 +35,8 @@
                     <ul class="segment-percentage__list">
                         <li v-for="(subLabel, j) in subLabels" :key="j">
                             {{ subLabel }}:
-                            <span class="percentage__list-label">{{ twoDimPercentages()[index][j] }}%</span>
+                            <span class="percentage__list-label" v-if="subLabelValue === 'percent'">{{ twoDimPercentages()[index][j] }}%</span>
+                            <span class="percentage__list-label" v-else>{{ values[index][j] | format }}</span>
                         </li>
                     </ul>
                 </div>
@@ -81,6 +82,10 @@
                 default() { return []; }
             },
             subLabels: Array,
+            subLabelValue: {
+                type: String,
+                default: 'percent'
+            },
             direction: {
                 type: String,
                 default: 'horizontal'
@@ -262,6 +267,11 @@
                     .setWidth(this.width)
                     .setHeight(this.height);
                 this.drawPaths();
+            }
+        },
+        filters: {
+            format: function (value) {
+                return formatNumber(value)
             }
         }
     };
