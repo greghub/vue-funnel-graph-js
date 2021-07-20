@@ -1,6 +1,6 @@
 {
-  "name": "vue-funnel-graph-js",
-  "version": "0.1.8",
+  "name": "technisys-vue-funnel-graph-js",
+  "version": "0.1.9",
   "description": "",
   "main": "dist/vue-funnel-graph.umd.js",
   "module": "dist/vue-funnel-graph.esm.js",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/greghub/vue-funnel-graph-js.git"
+    "url": "https://github.com/jastabile/vue-funnel-graph-js.git"
   },
   "licence": "MIT",
   "keywords": [
