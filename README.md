@@ -36,26 +36,15 @@ This is the Vue.js version of FunnelGraph.js, learn more about the library and s
 ## Installation
 
 #### NPM
-```js
-npm i vue-funnel-graph-js
 ```
-
-#### UNPKG
-```html
-<script src="https://unpkg.com/vue-funnel-graph-js"></script>
+npm i technisys-vue-funnel-graph-js
 ```
-
-#### CDN
-```html
-<script src="https://cdn.jsdelivr.net/npm/vue-funnel-graph-js/dist/vue-funnel-graph.min.js"></script>
-```
-
 ## Usage
 
 After installing, import the `VueFunnelGraph` component:
 
 ```js
-import { VueFunnelGraph } from 'vue-funnel-graph-js';
+import { VueFunnelGraph } from 'technisys-vue-funnel-graph-js';
 ```
 
 You can now use the custom element:

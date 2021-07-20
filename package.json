@@ -1,6 +1,6 @@
 {
-  "name": "vue-funnel-graph-js",
-  "version": "0.1.8",
+  "name": "technisys-vue-funnel-graph-js",
+  "version": "0.1.9",
   "description": "",
   "main": "dist/vue-funnel-graph.umd.js",
   "module": "dist/vue-funnel-graph.esm.js",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/greghub/vue-funnel-graph-js.git"
+    "url": "https://github.com/jastabile/vue-funnel-graph-js.git"
   },
   "licence": "MIT",
   "keywords": [
@@ -42,7 +42,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^17.4.0",
     "funnel-graph-js": "^1.4.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^6.0.1",
     "polymorph-js": "^0.2.4",
     "sass-loader": "^7.3.1"
   },
