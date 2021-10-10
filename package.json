@@ -44,7 +44,7 @@
     "funnel-graph-js": "^1.4.1",
     "node-sass": "^6.0.1",
     "polymorph-js": "^0.2.4",
-    "sass-loader": "^7.3.1"
+    "sass-loader": "^10.2.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.1",
