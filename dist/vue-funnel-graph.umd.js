@@ -1,11 +1,13 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('polymorph-js'), require('@tweenjs/tween.js'), require('funnel-graph-js'), require('funnel-graph-js/src/js/number'), require('funnel-graph-js/src/js/graph'), require('funnel-graph-js/src/scss/main.scss'), require('funnel-graph-js/src/scss/theme.scss')) :
     typeof define === 'function' && define.amd ? define(['exports', 'polymorph-js', '@tweenjs/tween.js', 'funnel-graph-js', 'funnel-graph-js/src/js/number', 'funnel-graph-js/src/js/graph', 'funnel-graph-js/src/scss/main.scss', 'funnel-graph-js/src/scss/theme.scss'], factory) :
-    (global = global || self, factory(global.VueFunnelGraph = {}, global.interpolate, global.TWEEN, global.FunnelGraph, global.formatNumber, global.getDefaultColors));
-}(this, (function (exports, polymorphJs, TWEEN, FunnelGraph, number, graph) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.VueFunnelGraph = {}, global.interpolate, global.TWEEN, global.FunnelGraph, global.formatNumber, global.getDefaultColors));
+})(this, (function (exports, polymorphJs, TWEEN, FunnelGraph, number, graph) { 'use strict';
 
-    TWEEN = TWEEN && TWEEN.hasOwnProperty('default') ? TWEEN['default'] : TWEEN;
-    FunnelGraph = FunnelGraph && FunnelGraph.hasOwnProperty('default') ? FunnelGraph['default'] : FunnelGraph;
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var TWEEN__default = /*#__PURE__*/_interopDefaultLegacy(TWEEN);
+    var FunnelGraph__default = /*#__PURE__*/_interopDefaultLegacy(FunnelGraph);
 
     //
 
@@ -129,7 +131,7 @@
                 return ((Math.round(100 * index / (length - 1))) + "%");
             },
             makeAnimations: function makeAnimations() {
-                var this$1 = this;
+                var this$1$1 = this;
 
                 if (this.tween !== null) { this.tween.stop(); }
                 var interpolators = [];
@@ -147,8 +149,8 @@
                 }
 
                 this.paths.forEach(function (path, index) {
-                    var oldPath = this$1.prevPaths[index] || this$1.graph.getPathMedian(index);
-                    if (dimensionChanged) { oldPath = this$1.graph.getPathMedian(index); }
+                    var oldPath = this$1$1.prevPaths[index] || this$1$1.graph.getPathMedian(index);
+                    if (dimensionChanged) { oldPath = this$1$1.graph.getPathMedian(index); }
                     var interpolator = polymorphJs.interpolate([oldPath, path], {
                         addPoints: 1,
                         origin: origin,
@@ -160,18 +162,18 @@
                 });
 
                 function animate() {
-                    if (TWEEN.update()) {
+                    if (TWEEN__default["default"].update()) {
                         requestAnimationFrame(animate);
                     }
                 }
 
                 var position = { value: 0 };
-                this.tween = new TWEEN.Tween(position)
+                this.tween = new TWEEN__default["default"].Tween(position)
                     .to({ value: 1 }, 700)
-                    .easing(TWEEN.Easing.Cubic.InOut)
+                    .easing(TWEEN__default["default"].Easing.Cubic.InOut)
                     .onUpdate(function () {
-                        for (var index = 0; index < this$1.paths.length; index++) {
-                            this$1.$set(this$1.paths, index, interpolators[index](position.value));
+                        for (var index = 0; index < this$1$1.paths.length; index++) {
+                            this$1$1.$set(this$1$1.paths, index, interpolators[index](position.value));
                         }
                     });
 
@@ -179,19 +181,19 @@
                 animate();
             },
             drawPaths: function drawPaths() {
-                var this$1 = this;
+                var this$1$1 = this;
 
                 this.prevPaths = this.paths;
                 this.paths = [];
                 var definitions = this.graph.getPathDefinitions();
 
                 definitions.forEach(function (d) {
-                    this$1.paths.push(d);
+                    this$1$1.paths.push(d);
                 });
             }
         },
         created: function created() {
-            this.graph = new FunnelGraph({
+            this.graph = new FunnelGraph__default["default"]({
                 height: this.height,
                 width: this.width,
                 direction: this.direction,
@@ -223,140 +225,133 @@
         }
     };
 
-    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
-    /* server only */
-    , shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-      if (typeof shadowMode !== 'boolean') {
-        createInjectorSSR = createInjector;
-        createInjector = shadowMode;
-        shadowMode = false;
-      } // Vue.extend constructor export interop.
-
-
-      var options = typeof script === 'function' ? script.options : script; // render functions
-
-      if (template && template.render) {
-        options.render = template.render;
-        options.staticRenderFns = template.staticRenderFns;
-        options._compiled = true; // functional template
-
-        if (isFunctionalTemplate) {
-          options.functional = true;
+    function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+        if (typeof shadowMode !== 'boolean') {
+            createInjectorSSR = createInjector;
+            createInjector = shadowMode;
+            shadowMode = false;
         }
-      } // scopedId
-
-
-      if (scopeId) {
-        options._scopeId = scopeId;
-      }
-
-      var hook;
-
-      if (moduleIdentifier) {
-        // server build
-        hook = function hook(context) {
-          // 2.3 injection
-          context = context || // cached call
-          this.$vnode && this.$vnode.ssrContext || // stateful
-          this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
-          // 2.2 with runInNewContext: true
-
-          if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-            context = __VUE_SSR_CONTEXT__;
-          } // inject component styles
-
-
-          if (style) {
-            style.call(this, createInjectorSSR(context));
-          } // register component module identifier for async chunk inference
-
-
-          if (context && context._registeredComponents) {
-            context._registeredComponents.add(moduleIdentifier);
-          }
-        }; // used by ssr in case component is cached and beforeCreate
-        // never gets called
-
-
-        options._ssrRegister = hook;
-      } else if (style) {
-        hook = shadowMode ? function () {
-          style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
-        } : function (context) {
-          style.call(this, createInjector(context));
-        };
-      }
-
-      if (hook) {
-        if (options.functional) {
-          // register for functional component in vue file
-          var originalRender = options.render;
-
-          options.render = function renderWithStyleInjection(h, context) {
-            hook.call(context);
-            return originalRender(h, context);
-          };
-        } else {
-          // inject component registration as beforeCreate hook
-          var existing = options.beforeCreate;
-          options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+        // Vue.extend constructor export interop.
+        var options = typeof script === 'function' ? script.options : script;
+        // render functions
+        if (template && template.render) {
+            options.render = template.render;
+            options.staticRenderFns = template.staticRenderFns;
+            options._compiled = true;
+            // functional template
+            if (isFunctionalTemplate) {
+                options.functional = true;
+            }
         }
-      }
-
-      return script;
+        // scopedId
+        if (scopeId) {
+            options._scopeId = scopeId;
+        }
+        var hook;
+        if (moduleIdentifier) {
+            // server build
+            hook = function (context) {
+                // 2.3 injection
+                context =
+                    context || // cached call
+                        (this.$vnode && this.$vnode.ssrContext) || // stateful
+                        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+                // 2.2 with runInNewContext: true
+                if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                    context = __VUE_SSR_CONTEXT__;
+                }
+                // inject component styles
+                if (style) {
+                    style.call(this, createInjectorSSR(context));
+                }
+                // register component module identifier for async chunk inference
+                if (context && context._registeredComponents) {
+                    context._registeredComponents.add(moduleIdentifier);
+                }
+            };
+            // used by ssr in case component is cached and beforeCreate
+            // never gets called
+            options._ssrRegister = hook;
+        }
+        else if (style) {
+            hook = shadowMode
+                ? function (context) {
+                    style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+                }
+                : function (context) {
+                    style.call(this, createInjector(context));
+                };
+        }
+        if (hook) {
+            if (options.functional) {
+                // register for functional component in vue file
+                var originalRender = options.render;
+                options.render = function renderWithStyleInjection(h, context) {
+                    hook.call(context);
+                    return originalRender(h, context);
+                };
+            }
+            else {
+                // inject component registration as beforeCreate hook
+                var existing = options.beforeCreate;
+                options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+            }
+        }
+        return script;
     }
 
-    var normalizeComponent_1 = normalizeComponent;
-
-    var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+    var isOldIE = typeof navigator !== 'undefined' &&
+        /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
     function createInjector(context) {
-      return function (id, style) {
-        return addStyle(id, style);
-      };
+        return function (id, style) { return addStyle(id, style); };
     }
-    var HEAD = document.head || document.getElementsByTagName('head')[0];
+    var HEAD;
     var styles = {};
-
     function addStyle(id, css) {
-      var group = isOldIE ? css.media || 'default' : id;
-      var style = styles[group] || (styles[group] = {
-        ids: new Set(),
-        styles: []
-      });
-
-      if (!style.ids.has(id)) {
-        style.ids.add(id);
-        var code = css.source;
-
-        if (css.map) {
-          // https://developer.chrome.com/devtools/docs/javascript-debugging
-          // this makes source maps inside style tags work properly in Chrome
-          code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
-
-          code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
+        var group = isOldIE ? css.media || 'default' : id;
+        var style = styles[group] || (styles[group] = { ids: new Set(), styles: [] });
+        if (!style.ids.has(id)) {
+            style.ids.add(id);
+            var code = css.source;
+            if (css.map) {
+                // https://developer.chrome.com/devtools/docs/javascript-debugging
+                // this makes source maps inside style tags work properly in Chrome
+                code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
+                // http://stackoverflow.com/a/26603875
+                code +=
+                    '\n/*# sourceMappingURL=data:application/json;base64,' +
+                        btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
+                        ' */';
+            }
+            if (!style.element) {
+                style.element = document.createElement('style');
+                style.element.type = 'text/css';
+                if (css.media)
+                    { style.element.setAttribute('media', css.media); }
+                if (HEAD === undefined) {
+                    HEAD = document.head || document.getElementsByTagName('head')[0];
+                }
+                HEAD.appendChild(style.element);
+            }
+            if ('styleSheet' in style.element) {
+                style.styles.push(code);
+                style.element.styleSheet.cssText = style.styles
+                    .filter(Boolean)
+                    .join('\n');
+            }
+            else {
+                var index = style.ids.size - 1;
+                var textNode = document.createTextNode(code);
+                var nodes = style.element.childNodes;
+                if (nodes[index])
+                    { style.element.removeChild(nodes[index]); }
+                if (nodes.length)
+                    { style.element.insertBefore(textNode, nodes[index]); }
+                else
+                    { style.element.appendChild(textNode); }
+            }
         }
-
-        if (!style.element) {
-          style.element = document.createElement('style');
-          style.element.type = 'text/css';
-          if (css.media) { style.element.setAttribute('media', css.media); }
-          HEAD.appendChild(style.element);
-        }
-
-        if ('styleSheet' in style.element) {
-          style.styles.push(code);
-          style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n');
-        } else {
-          var index = style.ids.size - 1;
-          var textNode = document.createTextNode(code);
-          var nodes = style.element.childNodes;
-          if (nodes[index]) { style.element.removeChild(nodes[index]); }
-          if (nodes.length) { style.element.insertBefore(textNode, nodes[index]); }else { style.element.appendChild(textNode); }
-        }
-      }
     }
-
-    var browser = createInjector;
 
     /* script */
     var __vue_script__ = script;
@@ -379,16 +374,20 @@
       var __vue_is_functional_template__ = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var vueFunnelGraph = normalizeComponent_1(
+      var __vue_component__ = /*#__PURE__*/normalizeComponent(
         { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
         __vue_inject_styles__,
         __vue_script__,
         __vue_scope_id__,
         __vue_is_functional_template__,
         __vue_module_identifier__,
-        browser,
+        false,
+        createInjector,
+        undefined,
         undefined
       );
 
@@ -396,7 +395,7 @@
 
     var components = /*#__PURE__*/Object.freeze({
         __proto__: null,
-        VueFunnelGraph: vueFunnelGraph
+        VueFunnelGraph: __vue_component__
     });
 
     // Import vue components
@@ -427,9 +426,9 @@
       GlobalVue.use(plugin);
     }
 
-    exports.VueFunnelGraph = vueFunnelGraph;
-    exports.default = plugin;
+    exports.VueFunnelGraph = __vue_component__;
+    exports["default"] = plugin;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
