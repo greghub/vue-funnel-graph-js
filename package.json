@@ -44,7 +44,7 @@
     "funnel-graph-js": "^1.4.1",
     "node-sass": "^4.13.1",
     "polymorph-js": "^0.2.4",
-    "sass-loader": "^7.3.1"
+    "sass-loader": "^13.2.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.1",
@@ -55,9 +55,9 @@
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-uglify-es": "0.0.1",
-    "rollup-plugin-vue": "^4.6.2",
+    "rollup-plugin-vue": "^6.0.0",
     "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.41.5"
+    "webpack": "^5.75.0"
   }
 }
