@@ -1,6 +1,6 @@
 {
   "name": "vue-funnel-graph-js",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "",
   "main": "dist/vue-funnel-graph.umd.js",
   "module": "dist/vue-funnel-graph.esm.js",
@@ -34,30 +34,29 @@
     "vue-funnel"
   ],
   "scripts": {
-    "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
-    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/vue-funnel-graph.umd.js",
-    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es --file dist/vue-funnel-graph.esm.js",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife --file dist/vue-funnel-graph.min.js"
+    "build": "npm run build:unpkg --bundleConfigAsCjs & npm run build:es --bundleConfigAsCjs & npm run build:umd --bundleConfigAsCjs",
+    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/vue-funnel-graph.umd.js --bundleConfigAsCjs",
+    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es --file dist/vue-funnel-graph.esm.js --bundleConfigAsCjs",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife --file dist/vue-funnel-graph.min.js --bundleConfigAsCjs"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.4.0",
-    "funnel-graph-js": "^1.4.1",
-    "node-sass": "^4.13.1",
-    "polymorph-js": "^0.2.4",
-    "sass-loader": "^7.3.1"
+    "funnel-graph-js": "^1.4.2",
+    "polymorph-js": "^1.0.2"
   },
   "devDependencies": {
-    "cross-env": "^5.2.1",
-    "minimist": "^1.2.0",
-    "rollup": "^1.31.0",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^9.3.4",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-uglify-es": "0.0.1",
-    "rollup-plugin-vue": "^4.6.2",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.41.5"
+    "@rollup/plugin-buble": "^1.0.3",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-terser": "^0.4.4",
+    "cross-env": "^7.0.3",
+    "minimist": "^1.2.5",
+    "rollup": "^4.6.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-vue2": "^0.8.1",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "vue": "^2.7.15",
+    "webpack": "^5.89.0"
   }
 }
